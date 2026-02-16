@@ -1,0 +1,14 @@
+[project]
+name = "ppt-to-pdf"
+version = "0.1.0"
+description = "Convert PowerPoint to PDF using Flask web interface"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask",
+    "python-socketio",
+    "python-engineio",
+]
+
+[project.optional-dependencies]
+dev = []
