@@ -7,8 +7,8 @@ import uuid
 from datetime import datetime
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['OUTPUT_FOLDER'] = 'output'
+app.config['UPLOAD_FOLDER'] = os.path.abspath('uploads')
+app.config['OUTPUT_FOLDER'] = os.path.abspath('output')
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
 app.config['ALLOWED_EXTENSIONS'] = {'ppt', 'pptx'}
 
@@ -89,13 +89,13 @@ def convert_files():
             continue
         
         try:
-            # Get the base name without extension
-            base_name = os.path.splitext(original_name)[0]
+            # Get the base name without extension for the uploaded file
+            base_name = os.path.splitext(filename)[0]
             pdf_name = f"{base_name}.pdf"
             
             # Run LibreOffice conversion
             result = subprocess.run(
-                ['libreoffice', '--headless', '--convert-to', 'pdf', 
+                ['libreoffice', '--headless', '--norestore', '--convert-to', 'pdf', 
                  '--outdir', app.config['OUTPUT_FOLDER'], filepath],
                 capture_output=True,
                 text=True,
@@ -112,7 +112,9 @@ def convert_files():
                         'success': True
                     })
                 else:
-                    failed.append({'name': original_name, 'error': 'PDF not created'})
+                    # Log stderr for debugging
+                    error_msg = result.stderr.strip() if result.stderr else 'PDF not created'
+                    failed.append({'name': original_name, 'error': error_msg})
             else:
                 failed.append({
                     'name': original_name,
