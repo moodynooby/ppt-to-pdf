@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPT to PDF Converter</title>
+    <title>PPT/Word to PDF Converter</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>PPT to PDF Converter</h1>
-            <p>Convert your PowerPoint files to PDF instantly</p>
+            <h1>PPT/Word to PDF Converter</h1>
+            <p>Convert your PowerPoint and Word files to PDF instantly</p>
         </header>
 
         <!-- Main Content -->
@@ -26,9 +26,9 @@
                     </svg>
                     <h2>Drag and drop files here</h2>
                     <p>or click to select files</p>
-                    <input type="file" id="fileInput" multiple accept=".ppt,.pptx" hidden>
+                    <input type="file" id="fileInput" multiple accept=".ppt,.pptx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" hidden>
                 </div>
-                <p class="file-info">Supported formats: PPT, PPTX | Max size: 500MB per file</p>
+                <p class="file-info">Supported formats: PPT, PPTX, DOC, DOCX | Max size: 500MB per file</p>
             </section>
 
             <!-- Files List -->
@@ -88,7 +88,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2024 PPT to PDF Converter. All rights reserved.</p>
+            <p>&copy; 2024 PPT/Word to PDF Converter. All rights reserved.</p>
         </footer>
     </div>
 

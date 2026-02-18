@@ -1,6 +1,6 @@
-# PPT to PDF Converter
+# PPT/Word to PDF Converter
 
-A modern web-based application to convert PowerPoint (PPT/PPTX) files to PDF format using Flask and LibreOffice.
+A modern web-based application to convert PowerPoint and Word files to PDF format using Flask and LibreOffice.
 
 ## Features
 
@@ -64,7 +64,7 @@ python app.py
 http://localhost:5000
 ```
 
-3. Select or drag and drop PowerPoint files (PPT/PPTX)
+3. Select or drag and drop PowerPoint or Word files (PPT/PPTX/DOC/DOCX)
 
 4. Click "Convert to PDF"
 
@@ -76,13 +76,13 @@ http://localhost:5000
 ppt-to-pdf/
 ├── app.py                 # Flask application
 ├── templates/
-│   └── index.html        # Web interface
+│   └── index.html         # Web interface
 ├── static/
-│   ├── style.css         # Styling
-│   └── script.js         # Client-side logic
-├── uploads/              # Temporary upload folder
-├── output/               # Converted PDF files
-└── pyproject.toml        # Project metadata
+│   ├── style.css          # Styling
+│   └── script.js          # Client-side logic
+├── uploads/               # Temporary upload folder
+├── output/                # Converted PDF files
+└── pyproject.toml         # Project metadata
 ```
 
 ## Configuration
@@ -97,7 +97,7 @@ Edit `app.py` to customize:
 ## API Endpoints
 
 ### POST `/api/upload`
-Upload PowerPoint files
+Upload PowerPoint or Word files
 - Returns: List of uploaded files with metadata
 
 ### POST `/api/convert`

@@ -10,7 +10,7 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 app.config['UPLOAD_FOLDER'] = os.path.abspath('uploads')
 app.config['OUTPUT_FOLDER'] = os.path.abspath('output')
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
-app.config['ALLOWED_EXTENSIONS'] = {'ppt', 'pptx'}
+app.config['ALLOWED_EXTENSIONS'] = {'ppt', 'pptx', 'doc', 'docx'}
 
 # Create folders if they don't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -39,7 +39,7 @@ def upload_files():
             continue
         
         if not allowed_file(file.filename):
-            errors.append(f'{file.filename}: Invalid file type. Use .ppt or .pptx')
+            errors.append(f'{file.filename}: Invalid file type. Use .ppt, .pptx, .doc, or .docx')
             continue
         
         filename = secure_filename(file.filename)

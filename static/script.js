@@ -59,7 +59,7 @@ class PPTConverter {
     }
 
     isValidFile(file) {
-        const validTypes = ['ppt', 'pptx'];
+        const validTypes = ['ppt', 'pptx', 'doc', 'docx'];
         const extension = file.name.split('.').pop().toLowerCase();
         return validTypes.includes(extension);
     }
