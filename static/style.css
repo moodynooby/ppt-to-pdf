@@ -84,6 +84,18 @@ html, body {
     transform: scale(1.01);
 }
 
+.upload-area:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    border-color: var(--primary-color);
+    background-color: #f0f6ff;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .upload-icon {
     width: 48px;
     height: 48px;
@@ -258,6 +270,17 @@ html, body {
 .btn-secondary:hover {
     background-color: #475569;
     transform: translateY(-2px);
+}
+
+.error-message {
+    color: var(--error-color);
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: 500;
 }
 
 /* Progress Section */

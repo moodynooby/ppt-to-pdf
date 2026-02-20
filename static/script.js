@@ -16,6 +16,14 @@ class PPTConverter {
         // Click to upload
         uploadArea.addEventListener('click', () => fileInput.click());
 
+        // Keyboard support
+        uploadArea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                fileInput.click();
+            }
+        });
+
         // Drag and drop
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -93,7 +101,7 @@ class PPTConverter {
                         <div class="file-item-size">${this.formatSize(file.size)}</div>
                     </div>
                 </div>
-                <button class="file-item-remove" onclick="converter.removeFile('${file.id}')">×</button>
+                <button class="file-item-remove" onclick="converter.removeFile('${file.id}')" aria-label="Remove ${this.escapeHtml(file.name)}">×</button>
             </div>
         `).join('');
     }
@@ -128,7 +136,7 @@ class PPTConverter {
 
     clearAll() {
         if (this.files.length === 0) return;
-        
+
         if (confirm('Are you sure you want to clear all files?')) {
             this.files = [];
             this.updateFilesList();
@@ -136,11 +144,27 @@ class PPTConverter {
         }
     }
 
+    showError(message) {
+        const errorDiv = document.getElementById('generalError');
+        if (errorDiv) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        } else {
+            alert(message);
+        }
+    }
+
     async convert() {
         if (this.files.length === 0) {
-            alert('Please add files to convert');
+            this.showError('Please add files to convert');
             return;
         }
+
+        const errorDiv = document.getElementById('generalError');
+        if (errorDiv) errorDiv.style.display = 'none';
 
         // Create FormData and upload files
         const formData = new FormData();
@@ -185,7 +209,7 @@ class PPTConverter {
             this.showResults(convertData);
 
         } catch (error) {
-            alert(`Error: ${error.message}`);
+            this.showError(`Error: ${error.message}`);
         } finally {
             document.getElementById('convertBtn').disabled = false;
             document.getElementById('progressSection').style.display = 'none';
